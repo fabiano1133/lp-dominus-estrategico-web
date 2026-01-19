@@ -98,6 +98,23 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
       <head>
+        {/* Google tag (gtag.js) - Deve estar o mais alto possível no <head> */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-BB4FQ5RMY2"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-BB4FQ5RMY2');
+            `,
+          }}
+        />
+        {/* End Google tag (gtag.js) */}
+        
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -109,6 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager */}
+        
         <link rel="icon" type="image/png" href="/logo.png" />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://dominustrategico.com.br'} />
         <meta name="google-site-verification" content="bPEUITpQl_3tYTZF2i1N5F88qw-lRJQcgCr2MVEZfEE" />
