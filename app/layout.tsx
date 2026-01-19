@@ -84,8 +84,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Adicione suas verificações aqui quando tiver
-    // google: 'seu-codigo-google',
+    google: 'bPEUITpQl_3tYTZF2i1N5F88qw-lRJQcgCr2MVEZfEE',
     // yandex: 'seu-codigo-yandex',
     // bing: 'seu-codigo-bing',
   },
@@ -101,6 +100,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/logo.png" />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://dominustrategico.com.br'} />
+        <meta name="google-site-verification" content="bPEUITpQl_3tYTZF2i1N5F88qw-lRJQcgCr2MVEZfEE" />
       </head>
       <body className="font-sans antialiased">
         <StructuredData />
