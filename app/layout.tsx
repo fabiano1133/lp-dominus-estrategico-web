@@ -17,26 +17,31 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Análise Estratégica de Comunicação | Dominus Estratégico",
-    template: "%s | Dominus Estratégico"
+    default: "Marketing Digital Estratégico para Conversão | Estruture suas Vendas Online",
+    template: "%s | Dominus Estratégico",
   },
-  description: "Diagnóstico estratégico de comunicação para empresas e profissionais autônomos. Organize sua comunicação digital, aumente vendas pela internet com Landing Pages alinhadas ao perfil do seu público-alvo. Método estruturado para conversão previsível.",
+  description:
+    "Estruture sua comunicação digital para gerar engajamento, confiança e vendas. Estratégia de marketing focada em conversão real.",
   keywords: [
+    "marketing digital estratégico",
+    "conversão de landing pages",
+    "vendas pela internet",
+    "engajamento digital",
+    "geração de leads qualificados",
+    "estrutura de comunicação",
+    "marketing para empresas e autônomos",
     "análise estratégica de comunicação",
     "diagnóstico estratégico de posicionamento",
     "landing page de alta conversão",
     "estruturação de comunicação digital",
-    "aumentar vendas pela internet",
     "comunicação estratégica para empresas",
     "organizar comunicação digital",
     "posicionamento estratégico",
-    "marketing estratégico",
     "conversão digital",
     "landing page profissional",
     "estruturação de mensagem",
     "comunicação coesa",
     "vendas online",
-    "marketing digital estratégico"
   ],
   authors: [{ name: "Dominus Estratégico" }],
   creator: "Dominus Estratégico",

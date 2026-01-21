@@ -30,11 +30,11 @@ export function ManifestoSection() {
             <div className="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
               <p>
                 Autoridade não se anuncia. Se estabelece através de método, ordem e clareza. 
-                Quando a comunicação segue uma estrutura coerente com o padrão de decisão do 
+                Quando a comunicação segue uma estrutura de comunicação coerente com o padrão de decisão do 
                 público, a escolha ocorre naturalmente.
               </p>
               <p>
-                Método supera inspiração. Ordem gera confiança. Previsibilidade gera resultados.
+                Método supera inspiração. Ordem gera confiança. Previsibilidade gera resultados em vendas pela internet.
               </p>
               <p className="font-semibold pt-4">
                 Esta é a base sobre a qual trabalhamos.

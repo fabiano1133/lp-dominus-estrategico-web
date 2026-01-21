@@ -42,6 +42,15 @@ export function MethodSection() {
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold">
               Nós seguimos um método claro para ordenar, posicionar e estruturar sua comunicação.
             </h2>
+            <div className="space-y-2 pt-4 max-w-3xl mx-auto">
+              <h3 className="font-serif text-2xl md:text-3xl font-semibold text-secondary">
+                Método E.D.E — Estrutura → Direção → Engajamento
+              </h3>
+              <p className="text-white/90 text-base md:text-lg leading-relaxed">
+                Estruturamos a sua comunicação digital, definimos a direção estratégica da mensagem e criamos 
+                engajamento digital consistente para gerar conversão de landing pages e leads qualificados.
+              </p>
+            </div>
           </div>
 
           {/* Quatro Colunas Horizontais */}

@@ -24,21 +24,21 @@ export function HeroSection() {
           backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
         }}
       >
-        {/* Overlay com gradiente fade da esquerda (menos visível) para direita (100% visível) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent"></div>
+        {/* Overlay com gradiente mais claro da esquerda para a direita */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/60"></div>
       </div>
 
       {/* Conteúdo sobreposto */}
       <div className="container mx-auto px-4 lg:px-8 xl:px-12 relative z-10 w-full">
         <div className="max-w-2xl space-y-8 py-20">
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-primary text-left drop-shadow-sm">
-            Existe uma forma correta de vender pela internet.
+            Transforme visitantes em clientes com uma comunicação estratégica que gera decisão.
           </h1>
           
           <p className="text-lg md:text-xl text-gray-800 leading-relaxed text-left font-medium drop-shadow-sm">
-            Empresas e profissionais autônomos falham em vendas não por falta de tráfego, 
-            mas por desorganização da mensagem. Quando a comunicação não segue uma estrutura 
-            coerente, a decisão não ocorre.
+            Empresas e profissionais autônomos perdem vendas não por falta de tráfego, mas por mensagens confusas. 
+            Estruturamos sua comunicação e o seu marketing digital estratégico para gerar engajamento, confiança e 
+            conversão previsível nas suas vendas pela internet.
           </p>
 
           <div className="pt-4">
@@ -47,7 +47,7 @@ export function HeroSection() {
               size="lg"
               className="bg-primary text-white hover:bg-primary/90 text-base md:text-lg px-8 md:px-12 py-6 h-auto font-semibold w-full sm:w-auto"
             >
-              SOLICITAR DIAGNÓSTICO
+              Quero estruturar minhas vendas
             </Button>
           </div>
 

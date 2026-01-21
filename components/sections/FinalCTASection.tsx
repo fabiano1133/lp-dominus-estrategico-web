@@ -39,10 +39,10 @@ export function FinalCTASection() {
     } catch (error: any) {
       console.error("Erro ao enviar formulário:", error)
       
-      // Extrair mensagem de erro da resposta do backend
-      const message = error.response?.data?.error || 
-                     error.response?.data?.message || 
-                     "Erro ao enviar formulário. Tente novamente ou entre em contato diretamente."
+      const message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Erro ao enviar formulário. Tente novamente ou entre em contato diretamente."
       
       setErrorMessage(message)
       setSubmitStatus("error")
@@ -164,8 +164,12 @@ export function FinalCTASection() {
               size="lg"
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 text-lg font-semibold"
             >
-              {isSubmitting ? "Enviando..." : "Solicitar diagnóstico estratégico"}
+              {isSubmitting ? "Enviando..." : "Quero estruturar minhas vendas"}
             </Button>
+
+            <p className="mt-3 text-center text-xs text-gray-500">
+              Atendimento estratégico. Sem promessas vazias. Sem fórmulas prontas.
+            </p>
           </form>
 
           <div className="mt-8 text-center text-sm text-gray-500">

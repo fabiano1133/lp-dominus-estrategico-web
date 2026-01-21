@@ -31,7 +31,8 @@ export function ProblemSection() {
           </h2>
           <p className="text-lg text-gray-700 text-left">
             Empresas investem em tráfego, criatividade e tecnologia, mas ignoram o que realmente 
-            determina a conversão: a organização hierárquica da mensagem. Sem ordem, não existe decisão.
+            determina a conversão de landing pages: uma estrutura de comunicação clara, coerente e alinhada 
+            ao posicionamento. Sem ordem, não existe decisão.
           </p>
         </div>
 
