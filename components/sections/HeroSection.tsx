@@ -17,11 +17,12 @@ export function HeroSection() {
 
   return (
     <section id="hero" className="relative min-h-[95vh] flex items-center" itemScope itemType="https://schema.org/WebPage" data-gtm-section="hero">
-      {/* Imagem de Fundo - Ocupa toda a largura */}
+      {/* Imagem de Fundo - Ocupa toda a largura - Otimizada para LCP */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=75&w=1920&auto=format&fit=crop')",
+          willChange: "transform",
         }}
         role="img"
         aria-label="Estrutura arquitetônica moderna representando organização e método estratégico para criação de Landing Pages que convertem"

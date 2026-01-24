@@ -19,20 +19,30 @@ export function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonProps) {
   const [showDesktop, setShowDesktop] = useState(false)
 
   useEffect(() => {
+    // Throttle para melhor performance
+    let ticking = false
+    
     const handleScroll = () => {
-      if (typeof window === "undefined") return
-      const isDesktop = window.innerWidth >= 1024
-      if (!isDesktop) {
-        setShowDesktop(false)
-        return
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (typeof window === "undefined") return
+          const isDesktop = window.innerWidth >= 1024
+          if (!isDesktop) {
+            setShowDesktop(false)
+            ticking = false
+            return
+          }
+          const afterFirstFold = window.scrollY > window.innerHeight * 0.6
+          setShowDesktop(afterFirstFold)
+          ticking = false
+        })
+        ticking = true
       }
-      const afterFirstFold = window.scrollY > window.innerHeight * 0.6
-      setShowDesktop(afterFirstFold)
     }
 
     handleScroll()
-    window.addEventListener("scroll", handleScroll)
-    window.addEventListener("resize", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("resize", handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener("scroll", handleScroll)

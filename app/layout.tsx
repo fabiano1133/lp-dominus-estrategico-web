@@ -7,13 +7,17 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 })
 
 const poppins = Poppins({ 
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["600", "700", "800"],
   variable: "--font-poppins",
   display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 })
 
 export const metadata: Metadata = {
@@ -106,29 +110,42 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${poppins.variable}`}>
       <head>
-        {/* Google tag (gtag.js) - Deve estar o mais alto possível no <head> */}
+        {/* Preload recursos críticos */}
+        <link
+          rel="preload"
+          href="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop"
+          as="image"
+          fetchPriority="high"
+        />
+        
+        {/* Google tag (gtag.js) - Carregado de forma não bloqueante */}
         <script
           async
+          defer
           src="https://www.googletagmanager.com/gtag/js?id=G-BB4FQ5RMY2"
         />
         <script
+          defer
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-BB4FQ5RMY2');
+              gtag('config', 'G-BB4FQ5RMY2', {
+                page_path: window.location.pathname,
+              });
             `,
           }}
         />
         {/* End Google tag (gtag.js) */}
         
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager - Carregado de forma não bloqueante */}
         <script
+          defer
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NSN2JHVN');`,
           }}

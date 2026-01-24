@@ -17,7 +17,8 @@ export function ManifestoSection() {
                 height={128}
                 className="object-contain h-28 md:h-32 w-auto rounded-full"
                 priority
-                quality={90}
+                quality={85}
+                loading="eager"
               />
             </div>
           </div>
