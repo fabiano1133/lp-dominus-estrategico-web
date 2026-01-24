@@ -26,14 +26,13 @@ export function MethodSection() {
 
   return (
     <section id="metodo" className="relative py-20 md:py-28 bg-primary text-white overflow-hidden" data-gtm-section="method">
-      {/* Imagem de Fundo Sutil - Lazy Loading */}
+      {/* Imagem de Fundo Sutil */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
         style={{
           backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
           filter: "grayscale(100%)",
         }}
-        loading="lazy"
         aria-hidden="true"
       ></div>
 
