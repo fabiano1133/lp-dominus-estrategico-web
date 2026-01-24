@@ -110,12 +110,14 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${poppins.variable}`}>
       <head>
-        {/* Preload recursos críticos */}
+        {/* Preload imagem Hero - Crítico para LCP */}
         <link
           rel="preload"
-          href="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop"
+          href="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=70&w=1920&h=1080&auto=format&fit=crop"
           as="image"
           fetchPriority="high"
+          imageSrcSet="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=70&w=640&h=360&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=70&w=1280&h=720&auto=format&fit=crop 1280w, https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=70&w=1920&h=1080&auto=format&fit=crop 1920w"
+          imageSizes="100vw"
         />
         
         {/* Google tag (gtag.js) - Carregado de forma não bloqueante */}

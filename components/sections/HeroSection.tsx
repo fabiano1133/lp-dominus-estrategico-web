@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Check, ArrowRight } from "lucide-react"
+import Image from "next/image"
 
 export function HeroSection() {
   const scrollToForm = () => {
@@ -15,18 +16,26 @@ export function HeroSection() {
     "Comunicação alinhada com seu público-alvo",
   ]
 
+  // URL otimizada para melhor performance (LCP)
+  const heroImageUrl = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=70&w=1920&h=1080&auto=format&fit=crop"
+
   return (
     <section id="hero" className="relative min-h-[95vh] flex items-center" itemScope itemType="https://schema.org/WebPage" data-gtm-section="hero">
-      {/* Imagem de Fundo - Ocupa toda a largura - Otimizada para LCP */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=75&w=1920&auto=format&fit=crop')",
-          willChange: "transform",
-        }}
-        role="img"
-        aria-label="Estrutura arquitetônica moderna representando organização e método estratégico para criação de Landing Pages que convertem"
-      >
+      {/* Imagem de Fundo - Otimizada para LCP com Next.js Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={heroImageUrl}
+          alt="Estrutura arquitetônica moderna representando organização e método estratégico para criação de Landing Pages que convertem"
+          fill
+          priority
+          quality={75}
+          className="object-cover"
+          sizes="100vw"
+          fetchPriority="high"
+          style={{
+            objectPosition: "center right",
+          }}
+        />
         {/* Overlay com gradiente otimizado para melhor contraste */}
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/50" aria-hidden="true"></div>
       </div>
