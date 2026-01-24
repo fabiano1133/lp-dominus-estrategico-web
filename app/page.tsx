@@ -4,6 +4,7 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { ProblemSection } from "@/components/sections/ProblemSection"
 import { MethodSection } from "@/components/sections/MethodSection"
+import { LandingPageSection } from "@/components/sections/LandingPageSection"
 import { IntermediateCTASection } from "@/components/sections/IntermediateCTASection"
 import { ManifestoSection } from "@/components/sections/ManifestoSection"
 import { FinalCTASection } from "@/components/sections/FinalCTASection"
@@ -14,10 +15,11 @@ export default function Home() {
   
   return (
     <>
-      <main className="min-h-screen">
+      <main className="min-h-screen" data-gtm-page="landing-page" data-gtm-page-name="dominustrategico">
         <HeroSection />
         <ProblemSection />
         <MethodSection />
+        <LandingPageSection />
         <IntermediateCTASection />
         <ManifestoSection />
         <FinalCTASection />

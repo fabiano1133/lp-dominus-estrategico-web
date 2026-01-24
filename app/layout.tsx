@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Poppins } from "next/font/google"
 import { StructuredData } from "@/components/seo/StructuredData"
 import "./globals.css"
 
@@ -9,38 +9,41 @@ const inter = Inter({
   display: "swap",
 })
 
-const playfair = Playfair_Display({ 
+const poppins = Poppins({ 
   subsets: ["latin"],
-  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
   display: "swap",
 })
 
 export const metadata: Metadata = {
   title: {
-    default: "Marketing Digital Estratégico para Conversão | Estruture suas Vendas Online",
+    default: "Criação de Landing Pages que Convertem | Agência Especializada | Dominus Estratégico",
     template: "%s | Dominus Estratégico",
   },
   description:
-    "Estruture sua comunicação digital para gerar engajamento, confiança e vendas. Estratégia de marketing focada em conversão real.",
+    "Especialistas em criação de Landing Pages que convertem. Estruturamos sua comunicação e criamos Landing Pages estratégicas que transformam visitantes em clientes. Diagnóstico gratuito em 24h.",
   keywords: [
-    "marketing digital estratégico",
+    "criação de landing pages que convertem",
+    "landing page que converte",
+    "criar landing page de alta conversão",
+    "agência criação landing page",
+    "landing page estratégica",
+    "como criar landing page que converte",
+    "landing page profissional",
     "conversão de landing pages",
+    "aumentar conversão landing page",
+    "marketing digital estratégico",
+    "como aumentar vendas online",
+    "aumentar conversão de vendas",
     "vendas pela internet",
-    "engajamento digital",
-    "geração de leads qualificados",
     "estrutura de comunicação",
-    "marketing para empresas e autônomos",
-    "análise estratégica de comunicação",
-    "diagnóstico estratégico de posicionamento",
-    "landing page de alta conversão",
-    "estruturação de comunicação digital",
-    "comunicação estratégica para empresas",
+    "diagnóstico estratégico gratuito",
+    "comunicação estratégica",
     "organizar comunicação digital",
     "posicionamento estratégico",
     "conversão digital",
-    "landing page profissional",
     "estruturação de mensagem",
-    "comunicação coesa",
     "vendas online",
   ],
   authors: [{ name: "Dominus Estratégico" }],
@@ -60,8 +63,8 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: '/',
     siteName: 'Dominus Estratégico',
-    title: 'Análise Estratégica de Comunicação | Dominus Estratégico',
-    description: 'Diagnóstico estratégico de comunicação para empresas e profissionais autônomos. Organize sua comunicação digital e aumente vendas pela internet.',
+    title: 'Criação de Landing Pages que Convertem | Agência Especializada | Dominus Estratégico',
+    description: 'Especialistas em criação de Landing Pages que convertem. Estruturamos sua comunicação e criamos Landing Pages estratégicas que transformam visitantes em clientes. Diagnóstico gratuito em 24h.',
     images: [
       {
         url: '/logo.png',
@@ -73,8 +76,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Análise Estratégica de Comunicação | Dominus Estratégico',
-    description: 'Diagnóstico estratégico de comunicação para empresas e profissionais autônomos. Organize sua comunicação digital e aumente vendas pela internet.',
+    title: 'Criação de Landing Pages que Convertem | Agência Especializada | Dominus Estratégico',
+    description: 'Especialistas em criação de Landing Pages que convertem. Estruturamos sua comunicação e criamos Landing Pages estratégicas que transformam visitantes em clientes. Diagnóstico gratuito em 24h.',
     images: ['/logo.png'],
   },
   robots: {
@@ -101,7 +104,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="pt-BR" className={`${inter.variable} ${poppins.variable}`}>
       <head>
         {/* Google tag (gtag.js) - Deve estar o mais alto possível no <head> */}
         <script

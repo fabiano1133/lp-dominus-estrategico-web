@@ -53,6 +53,10 @@ export function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonProps) {
           size="lg"
           className="w-full max-w-xs bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full h-12 px-6 gap-2"
           aria-label="Falar com um especialista pelo WhatsApp"
+          data-gtm-element="whatsapp-mobile"
+          data-gtm-action="click"
+          data-gtm-label="falar-com-especialista"
+          data-gtm-channel="whatsapp"
         >
           <MessageCircle className="h-5 w-5" strokeWidth={2} />
           <span className="font-semibold text-sm">
@@ -73,6 +77,10 @@ export function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonProps) {
           size="lg"
           className="bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full h-14 px-6 gap-3 group"
           aria-label="Falar com um especialista pelo WhatsApp"
+          data-gtm-element="whatsapp-desktop"
+          data-gtm-action="click"
+          data-gtm-label="falar-com-especialista"
+          data-gtm-channel="whatsapp"
         >
           <MessageCircle className="h-6 w-6" strokeWidth={2} />
           <span className="font-semibold text-base">
