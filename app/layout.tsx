@@ -120,22 +120,19 @@ export default function RootLayout({
           imageSizes="100vw"
         />
         
-        {/* Google tag (gtag.js) - Carregado de forma não bloqueante */}
+        {/* Google tag (gtag.js) */}
         <script
           async
-          defer
-          src="https://www.googletagmanager.com/gtag/js?id=G-BB4FQ5RMY2"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17905134573"
         />
         <script
-          defer
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-BB4FQ5RMY2', {
-                page_path: window.location.pathname,
-              });
+
+              gtag('config', 'AW-17905134573');
             `,
           }}
         />
