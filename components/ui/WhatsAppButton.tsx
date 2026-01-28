@@ -50,7 +50,20 @@ export function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonProps) {
     }
   }, [])
 
-  const handleClick = () => {
+  const handleClick = (variant: "mobile" | "desktop") => {
+    if (typeof window === "undefined") return
+
+    const w = window as any
+    w.dataLayer = w.dataLayer || []
+
+    w.dataLayer.push({
+      event: "whatsapp_click",
+      channel: "whatsapp",
+      element: `whatsapp-${variant}`,
+      action: "click",
+      label: "falar-com-especialista",
+    })
+
     window.open(whatsappUrl, "_blank", "noopener,noreferrer")
   }
 
@@ -59,7 +72,7 @@ export function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonProps) {
       {/* Mobile: sempre visível, sticky */}
       <div className="fixed bottom-4 inset-x-0 z-50 flex justify-center px-4 md:hidden">
         <Button
-          onClick={handleClick}
+          onClick={() => handleClick("mobile")}
           size="lg"
           className="w-full max-w-xs bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full h-12 px-6 gap-2"
           aria-label="Falar com um especialista pelo WhatsApp"
@@ -83,7 +96,7 @@ export function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonProps) {
         )}
       >
         <Button
-          onClick={handleClick}
+          onClick={() => handleClick("desktop")}
           size="lg"
           className="bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full h-14 px-6 gap-3 group"
           aria-label="Falar com um especialista pelo WhatsApp"
