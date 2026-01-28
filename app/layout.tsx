@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://dominustrategico.com.br'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://dominusestrategico.sophos-tech-hub.com.br'),
   alternates: {
     canonical: '/',
   },
@@ -141,28 +141,27 @@ export default function RootLayout({
         />
         {/* End Google tag (gtag.js) */}
         
-        {/* Google Tag Manager - Carregado de forma não bloqueante */}
+        {/* Google Tag Manager */}
         <script
-          defer
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.defer=true;j.src=
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NSN2JHVN');`,
+})(window,document,'script','dataLayer','GTM-NWSQCQZK');`,
           }}
         />
         {/* End Google Tag Manager */}
         
         <link rel="icon" type="image/png" href="/logo.png" />
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://dominustrategico.com.br'} />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://dominusestrategico.sophos-tech-hub.com.br'} />
         <meta name="google-site-verification" content="bPEUITpQl_3tYTZF2i1N5F88qw-lRJQcgCr2MVEZfEE" />
       </head>
       <body className="font-sans antialiased">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NSN2JHVN"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NWSQCQZK"
             height="0"
             width="0"
             style={{ display: 'none', visibility: 'hidden' }}
