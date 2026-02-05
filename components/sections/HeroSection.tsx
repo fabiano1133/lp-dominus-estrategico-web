@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useState, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { FadeContent } from "@/components/animations/FadeContent"
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -60,7 +59,6 @@ export function HeroSection() {
             transform: `translate(calc(-50% + ${(mouse.x - 50) * 0.15}%), calc(-50% + ${(mouse.y - 50) * 0.15}%))`,
           }}
         />
-        {/* Gradiente estático suave para profundidade */}
         <div
           className="absolute inset-0 opacity-40"
           style={{
@@ -72,22 +70,22 @@ export function HeroSection() {
       <div className="container relative z-10 mx-auto px-5 sm:px-6 lg:px-12">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="flex max-w-3xl flex-col items-center lg:max-w-4xl">
-            <FadeContent animateOnMount delay={0.08} duration={0.9} y={28} className="w-full">
+            <div className="w-full animate-hero-fade">
               <h1 className="mx-auto max-w-3xl font-serif text-4xl sm:text-5xl md:text-6xl lg:max-w-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-foreground leading-[1.35] tracking-tight">
                 Aumente{" "}
                 <span className="text-primary">conversões</span>
                 {" "}e impulsione seu{" "}
                 <span className="text-primary">negócio</span>
               </h1>
-            </FadeContent>
-            <FadeContent animateOnMount delay={0.15} duration={0.8} y={24} className="w-full">
+            </div>
+            <div className="w-full animate-hero-fade animate-hero-fade-delay-1">
               <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed md:mt-8 md:text-xl">
                 Tráfego pago que converte, sites e aplicações web que vendem e landing pages que fecham. Pensado para
                 empresas e profissionais autônomos que querem transformar visitas em leads qualificados todos os dias.
               </p>
-            </FadeContent>
-            <FadeContent animateOnMount delay={0.3} duration={0.8} y={24} className="w-full">
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row md:mt-12">
+            </div>
+            <div className="w-full animate-hero-fade animate-hero-fade-delay-3 mt-10 md:mt-12">
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Button
                   asChild
                   size="lg"
@@ -110,7 +108,7 @@ export function HeroSection() {
                   <Link href="#como-trabalhamos">Ver como geramos resultados</Link>
                 </Button>
               </div>
-            </FadeContent>
+            </div>
           </div>
         </div>
       </div>

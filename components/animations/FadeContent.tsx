@@ -38,27 +38,49 @@ export function FadeContent({
     const el = ref.current
     if (!el) return
 
-    if (animateOnMount) {
-      gsap.fromTo(el, { opacity, y }, { opacity: 1, y: 0, duration, delay, ease: "power3.out" })
-      return
+    const cleanupRef = { current: (): void => undefined }
+
+    const run = () => {
+      if (animateOnMount) {
+        const tween = gsap.fromTo(el, { opacity, y }, { opacity: 1, y: 0, duration, delay, ease: "power3.out" })
+        cleanupRef.current = () => tween.kill()
+        return
+      }
+      const tween = gsap.fromTo(
+        el,
+        { opacity, y },
+        {
+          opacity: 1,
+          y: 0,
+          duration,
+          delay,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start,
+            toggleActions: once ? "play none none none" : "play none none reverse",
+          },
+        }
+      )
+      cleanupRef.current = () => {
+        tween.kill()
+        const trigger = tween.scrollTrigger
+        if (trigger) trigger.kill()
+      }
     }
 
-    gsap.fromTo(
-      el,
-      { opacity, y },
-      {
-        opacity: 1,
-        y: 0,
-        duration,
-        delay,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start,
-          toggleActions: once ? "play none none none" : "play none none reverse",
-        },
+    if (typeof requestIdleCallback !== "undefined") {
+      const id = requestIdleCallback(run, { timeout: 300 })
+      return () => {
+        cancelIdleCallback(id)
+        cleanupRef.current()
       }
-    )
+    }
+    const t = setTimeout(run, 0)
+    return () => {
+      clearTimeout(t)
+      cleanupRef.current()
+    }
   }, [opacity, y, duration, delay, start, once, animateOnMount])
 
   return (

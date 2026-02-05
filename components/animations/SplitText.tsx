@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger)
 
 interface SplitTextProps {
   children: string
@@ -38,36 +38,62 @@ export function SplitText({
     const el = ref.current
     if (!el) return
 
-    const chars = el.querySelectorAll<HTMLElement>("[data-split-char]")
-    if (chars.length === 0) return
+    const cleanupRef = { current: (): void => undefined }
 
-    const from: gsap.TweenVars =
-      type === "fadeUp"
-        ? { opacity: 0, y: 14 }
-        : { opacity: 0 }
-    const to: gsap.TweenVars =
-      type === "fadeUp"
-        ? { opacity: 1, y: 0, duration, ease: "power2.out" }
-        : { opacity: 1, duration, ease: "power2.out" }
+    const run = (): (() => void) | void => {
+      const chars = el.querySelectorAll<HTMLElement>("[data-split-char]")
+      if (chars.length === 0) return
 
-    const animation = gsap.fromTo(chars, from, {
-      ...to,
-      delay,
-      stagger: { each: stagger },
-      overwrite: true,
-      ...(scrollTrigger && {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          toggleActions: "play none none none",
+      const from: gsap.TweenVars =
+        type === "fadeUp"
+          ? { opacity: 0, y: 14 }
+          : { opacity: 0 }
+      const to: gsap.TweenVars =
+        type === "fadeUp"
+          ? { opacity: 1, y: 0, duration, ease: "power2.out" }
+          : { opacity: 1, duration, ease: "power2.out" }
+
+      const animation = gsap.fromTo(chars, from, {
+        ...to,
+        delay,
+        stagger: { each: stagger },
+        overwrite: true,
+        ...(scrollTrigger && {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }),
+      })
+
+      return () => {
+        animation.kill()
+        const trigger = animation.scrollTrigger
+        if (trigger) trigger.kill()
+      }
+    }
+
+    if (typeof requestIdleCallback !== "undefined") {
+      const id = requestIdleCallback(
+        () => {
+          const c = run()
+          if (c) cleanupRef.current = c
         },
-      }),
-    })
-
+        { timeout: 400 }
+      )
+      return () => {
+        cancelIdleCallback(id)
+        cleanupRef.current()
+      }
+    }
+    const t = setTimeout(() => {
+      const c = run()
+      if (c) cleanupRef.current = c
+    }, 0)
     return () => {
-      animation.kill()
-      const trigger = animation.scrollTrigger
-      if (trigger) trigger.kill()
+      clearTimeout(t)
+      cleanupRef.current()
     }
   }, [children, delay, duration, stagger, type, scrollTrigger])
 

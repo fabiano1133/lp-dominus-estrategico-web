@@ -70,6 +70,25 @@
     animation: fade-in 0.5s ease-out;
   }
 
+  /* Hero: animação só com CSS (reduz TBT — sem GSAP no primeiro quadro) */
+  @keyframes hero-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-hero-fade {
+    animation: hero-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+  }
+  .animate-hero-fade-delay-1 { animation-delay: 80ms; }
+  .animate-hero-fade-delay-2 { animation-delay: 230ms; }
+  .animate-hero-fade-delay-3 { animation-delay: 380ms; }
+
   @keyframes marquee {
     0% {
       transform: translateX(0);

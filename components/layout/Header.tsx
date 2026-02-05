@@ -18,29 +18,45 @@ export function Header() {
   useEffect(() => {
     const bar = barRef.current
     if (!bar) return
-    const tl = gsap.timeline()
-    tl.fromTo(
-      bar,
-      { y: -20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
-    )
-    const links = bar.querySelectorAll<HTMLElement>("nav a")
-    tl.fromTo(
-      links,
-      { opacity: 0, y: -8 },
-      { opacity: 1, y: 0, duration: 0.35, stagger: 0.06, ease: "power2.out" },
-      "-=0.25"
-    )
+    const run = () => {
+      const tl = gsap.timeline()
+      tl.fromTo(
+        bar,
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
+      )
+      const links = bar.querySelectorAll<HTMLElement>("nav a")
+      tl.fromTo(
+        links,
+        { opacity: 0, y: -8 },
+        { opacity: 1, y: 0, duration: 0.35, stagger: 0.06, ease: "power2.out" },
+        "-=0.25"
+      )
+    }
+    if (typeof requestIdleCallback !== "undefined") {
+      const id = requestIdleCallback(run, { timeout: 250 })
+      return () => cancelIdleCallback(id)
+    }
+    const t = setTimeout(run, 0)
+    return () => clearTimeout(t)
   }, [])
 
   useEffect(() => {
     if (!mobileOpen || !mobileNavRef.current) return
-    const links = mobileNavRef.current.querySelectorAll<HTMLElement>("a")
-    gsap.fromTo(
-      links,
-      { opacity: 0, x: -12 },
-      { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" }
-    )
+    const el = mobileNavRef.current
+    const links = el.querySelectorAll<HTMLElement>("a")
+    const run = () => {
+      gsap.fromTo(
+        links,
+        { opacity: 0, x: -12 },
+        { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" }
+      )
+    }
+    if (typeof requestIdleCallback !== "undefined") {
+      requestIdleCallback(run, { timeout: 100 })
+    } else {
+      setTimeout(run, 0)
+    }
   }, [mobileOpen])
 
   useEffect(() => {
