@@ -15,22 +15,21 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Marketing Digital e Desenvolvimento Web | Dominus Estratégico",
+    default: "Tráfego Pago e Landing Pages que Convertem | Dominus Estratégico",
     template: "%s | Dominus Estratégico",
   },
   description:
-    "Estratégia de marketing e desenvolvimento web na mesma mão. Posicionamento que vira presença. Presença que gera lead.",
+    "Estratégia e execução na mesma mão: tráfego pago, site e landing pages para empresas e autônomos gerarem mais leads. Agende uma conversa estratégica.",
   keywords: [
+    "tráfego pago",
+    "landing page",
+    "conversão",
     "marketing digital",
     "desenvolvimento web",
-    "site institucional",
-    "landing page",
-    "estratégia de marketing",
-    "posicionamento digital",
-    "lead qualificado",
-    "conversão",
-    "agência marketing",
     "criação de sites",
+    "aplicações web",
+    "lead qualificado",
+    "estratégia de marketing",
   ],
   authors: [{ name: "Dominus Estratégico" }],
   creator: "Dominus Estratégico",
@@ -49,21 +48,21 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "/",
     siteName: "Dominus Estratégico",
-    title: "Marketing Digital e Desenvolvimento Web | Dominus Estratégico",
-    description: "Estratégia de marketing e desenvolvimento web na mesma mão. Posicionamento que vira presença.",
+    title: "Tráfego Pago e Landing Pages que Convertem | Dominus Estratégico",
+    description: "Estratégia e execução na mesma mão: tráfego, site e LP para você gerar mais leads. Agende uma conversa estratégica.",
     images: [
       {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "Dominus Estratégico - Marketing Digital e Desenvolvimento Web",
+        alt: "Dominus Estratégico - Tráfego Pago e Landing Pages que Convertem",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marketing Digital e Desenvolvimento Web | Dominus Estratégico",
-    description: "Estratégia de marketing e desenvolvimento web na mesma mão. Posicionamento que vira presença.",
+    title: "Tráfego Pago e Landing Pages que Convertem | Dominus Estratégico",
+    description: "Estratégia e execução na mesma mão: tráfego, site e LP para você gerar mais leads. Agende uma conversa estratégica.",
     images: ["/logo.png"],
   },
   robots: {

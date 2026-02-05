@@ -90,6 +90,12 @@ export function FinalCTASection() {
               nos canais, e mostrar caminhos práticos para você gerar mais leads e vendas. Sem compromisso: você decide
               se faz sentido seguir comigo depois.
             </p>
+            <p className="text-sm md:text-base font-medium text-foreground pt-2 px-4">
+              O que você leva: um mapa de gargalos e 2–3 próximos passos claros.
+            </p>
+            <p className="text-sm text-muted-foreground px-4">
+              Nada de venda encalacrada — você decide o próximo passo.
+            </p>
           </div>
 
           <form

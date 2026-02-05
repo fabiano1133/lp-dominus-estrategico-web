@@ -42,7 +42,7 @@ export function Footer() {
             <p className="text-xs text-muted-foreground">
               © {currentYear} Dominus Estratégico. Todos os direitos reservados.
             </p>
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <a href="/politica-de-privacidade" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Política de privacidade
             </a>
           </div>

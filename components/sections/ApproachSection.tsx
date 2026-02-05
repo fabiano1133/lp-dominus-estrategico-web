@@ -36,6 +36,9 @@ export function ApproachSection() {
             </span>{" "}
             para o seu negócio
           </h2>
+          <p className="mt-3 text-sm font-medium text-muted-foreground text-center">
+            Um dos pilares do que fazemos: ao lado de tráfego pago, sites e landing pages.
+          </p>
           <p className="mt-4 text-lg text-muted-foreground text-center max-w-2xl mx-auto">
             Se você é{" "}
             <span className="font-medium text-foreground">empresa</span> ou{" "}

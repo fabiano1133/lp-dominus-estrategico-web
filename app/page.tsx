@@ -25,11 +25,11 @@ export default function Home() {
       >
         <HeroSection />
         <IntroSection />
+        <ProblemSection />
         <ProcessSection />
         <StatsSection />
         <TestimonialSection />
         <CaseSection />
-        <ProblemSection />
         <ApproachSection />
         <ProofSection />
         <FinalCTASection />
