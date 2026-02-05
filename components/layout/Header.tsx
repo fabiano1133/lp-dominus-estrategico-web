@@ -145,12 +145,12 @@ export function Header() {
 
               <button
                 type="button"
-                className="md:hidden p-2 rounded-lg text-foreground hover:bg-foreground/10 transition-colors"
+                className="md:hidden min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg text-foreground hover:bg-foreground/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
                 onClick={() => setMobileOpen((o) => !o)}
                 aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
                 aria-expanded={mobileOpen}
               >
-                {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {mobileOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
               </button>
             </div>
           </div>

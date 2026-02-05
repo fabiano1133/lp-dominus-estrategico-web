@@ -18,6 +18,7 @@ export default function Home() {
   return (
     <>
       <main
+        id="main"
         className="min-h-screen"
         data-gtm-page="institutional"
         data-gtm-page-name="dominustrategico"

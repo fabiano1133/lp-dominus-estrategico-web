@@ -95,6 +95,8 @@ export function CaseSection() {
                   alt=""
                   width={ICON_SIZE}
                   height={ICON_SIZE}
+                  loading="lazy"
+                  decoding="async"
                   className="h-12 w-12 sm:h-14 sm:w-14"
                 />
               </div>

@@ -6,11 +6,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const testimonials = [
   {
     quote: "Entendem o negócio primeiro, propõem o que faz sentido e executam com clareza.",
-    name: "Nome do cliente",
+    name: "João Henrique",
   },
   {
     quote: "Tráfego passou a converter. Estratégia e página alinhadas, resultado em semanas.",
-    name: "Maria Silva",
+    name: "Marcia Oliveira",
   },
   {
     quote: "Site e LP com foco em conversão. Leads qualificados aumentaram.",
@@ -70,18 +70,18 @@ export function TestimonialSection() {
           <button
             type="button"
             onClick={() => go(-1)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-colors z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card transition-colors z-10"
             aria-label="Depoimento anterior"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-6 w-6" aria-hidden />
           </button>
           <button
             type="button"
             onClick={() => go(1)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-colors z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card transition-colors z-10"
             aria-label="Próximo depoimento"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-6 w-6" aria-hidden />
           </button>
 
           <div
@@ -98,19 +98,20 @@ export function TestimonialSection() {
             </footer>
           </div>
 
-          <div className="flex justify-center gap-2 mt-8" aria-label="Posição do depoimento">
+          <div className="flex justify-center gap-2 mt-8" role="tablist" aria-label="Posição do depoimento">
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 type="button"
+                role="tab"
                 onClick={() => setIndex(i)}
-                className={`h-2 rounded-full transition-all duration-200 ${
+                className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full transition-all duration-200 ${
                   i === index
                     ? "w-6 bg-primary"
                     : "w-2 bg-muted-foreground/40 hover:bg-muted-foreground/60"
                 }`}
                 aria-label={`Ir ao depoimento ${i + 1}`}
-                aria-current={i === index ? "true" : undefined}
+                aria-selected={i === index}
               />
             ))}
           </div>

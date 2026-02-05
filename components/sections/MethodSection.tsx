@@ -26,15 +26,14 @@ export function MethodSection() {
 
   return (
     <section id="metodo" className="relative py-20 md:py-28 bg-primary text-white overflow-hidden" data-gtm-section="method">
-      {/* Imagem de Fundo Sutil */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+      {/* Fundo em gradiente (evita requisição externa e melhora PageSpeed) */}
+      <div
+        className="absolute inset-0 opacity-15"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')",
-          filter: "grayscale(100%)",
+          background: "radial-gradient(ellipse 80% 50% at 50% 50%, hsl(var(--secondary)) 0%, transparent 70%)",
         }}
         aria-hidden="true"
-      ></div>
+      />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
