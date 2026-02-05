@@ -1,32 +1,41 @@
 "use client"
 
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton"
 import { HeroSection } from "@/components/sections/HeroSection"
+import { IntroSection } from "@/components/sections/IntroSection"
+import { ProcessSection } from "@/components/sections/ProcessSection"
+import { StatsSection } from "@/components/sections/StatsSection"
+import { TestimonialSection } from "@/components/sections/TestimonialSection"
+import { CaseSection } from "@/components/sections/CaseSection"
 import { ProblemSection } from "@/components/sections/ProblemSection"
-import { MethodSection } from "@/components/sections/MethodSection"
-import { LandingPageSection } from "@/components/sections/LandingPageSection"
-import { IntermediateCTASection } from "@/components/sections/IntermediateCTASection"
-import { ManifestoSection } from "@/components/sections/ManifestoSection"
+import { ApproachSection } from "@/components/sections/ApproachSection"
+import { ProofSection } from "@/components/sections/ProofSection"
 import { FinalCTASection } from "@/components/sections/FinalCTASection"
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton"
 
 export default function Home() {
-  // Número do WhatsApp (formato: 5511999999999 - sem espaços, parênteses ou hífens)
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5511999999999"
-  
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "92984600010"
+
   return (
     <>
-      <main className="min-h-screen" data-gtm-page="landing-page" data-gtm-page-name="dominustrategico">
+      <main
+        className="min-h-screen"
+        data-gtm-page="institutional"
+        data-gtm-page-name="dominustrategico"
+      >
         <HeroSection />
+        <IntroSection />
+        <ProcessSection />
+        <StatsSection />
+        <TestimonialSection />
+        <CaseSection />
         <ProblemSection />
-        <MethodSection />
-        <LandingPageSection />
-        <IntermediateCTASection />
-        <ManifestoSection />
+        <ApproachSection />
+        <ProofSection />
         <FinalCTASection />
       </main>
-      <WhatsAppButton 
+      <WhatsAppButton
         phoneNumber={whatsappNumber}
-        message="Gostaria de solicitar um diagnóstico estratégico."
+        message="Gostaria de agendar uma conversa estratégica."
       />
     </>
   )

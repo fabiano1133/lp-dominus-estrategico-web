@@ -57,9 +57,9 @@ A Landing Page está preparada para rastreamento via **Google Tag Manager (GA4)*
   type="submit"
   data-gtm-element="cta-form-submit"
   data-gtm-action="submit"
-  data-gtm-label="quero-estruturar-minhas-vendas"
+  data-gtm-label="solicitar-diagnostico-gratuito"
 >
-  Quero estruturar minhas vendas
+  Solicitar Diagnóstico Gratuito
 </button>
 ```
 
@@ -169,19 +169,35 @@ A Landing Page está preparada para rastreamento via **Google Tag Manager (GA4)*
   - `gtm.channel`: "whatsapp"
 
 ### 3. Submissão de Formulário
-- **Trigger**: Submit em `#contact-form`
-- **Variáveis**:
-  - `gtm.formId`: "contact-form"
-  - `gtm.formName`: "diagnostico-estrategico"
-  - `gtm.element`: "cta-form-submit"
+- **Trigger (opção A)**: Submit em `#contact-form` (evento nativo do form)
+- **Trigger (opção B – recomendado)**: Custom Event → Event name = `form_submit`
+- **Variáveis** (via dataLayer):
+  - `form_id`: "contact-form"
+  - `form_name`: "diagnostico-estrategico"
+  - `form_action`: "submit"
 
-### 4. Sucesso/Erro do Formulário
+### 4. Sucesso do Formulário (conversão)
+- **Trigger**: Custom Event → Event name = `form_submit_success`
+- **Variáveis** (via dataLayer):
+  - `form_id`: "contact-form"
+  - `form_name`: "diagnostico-estrategico"
+  - `form_status`: "success"
+- **Uso**: Marcar como conversão no GA4.
+
+### 5. Erro do Formulário
+- **Trigger**: Custom Event → Event name = `form_submit_error`
+- **Variáveis** (via dataLayer):
+  - `form_id`: "contact-form"
+  - `form_name`: "diagnostico-estrategico"
+  - `form_status`: "error"
+
+### 6. Sucesso/Erro (fallback por visibilidade)
 - **Trigger**: Elemento visível com `data-gtm-event="form-success"` ou `data-gtm-event="form-error"`
 - **Variáveis**:
   - `gtm.event`: "form-success" ou "form-error"
   - `gtm.formStatus`: "success" ou "error"
 
-### 5. Scroll por Seção
+### 7. Scroll por Seção
 - **Trigger**: Elemento visível com `data-gtm-section="*"`
 - **Variáveis**:
   - `gtm.section`: Nome da seção (hero, problem, method, etc.)
@@ -218,30 +234,36 @@ A Landing Page está preparada para rastreamento via **Google Tag Manager (GA4)*
      - `channel`: `whatsapp`
      - `device`: `{{Click Element}}` → `data-gtm-element` (mobile/desktop)
 
-### Exemplo: Trigger para Formulário
+### Exemplo: Trigger para Formulário (Custom Event – recomendado)
 
 1. **Criar Trigger**:
-   - Tipo: Form Submission
-   - Form ID: `contact-form`
+   - Tipo: Custom Event
+   - Event name: `form_submit` (disparado ao clicar em Enviar)
+   - Ou: `form_submit_success` (disparado só quando a API retorna sucesso – use para conversão)
+   - Ou: `form_submit_error` (disparado quando a API retorna erro)
 
-2. **Criar Tag GA4**:
-   - Event Name: `form_submit`
+2. **Criar Tag GA4** (ex.: conversão):
+   - Trigger: Custom Event = `form_submit_success`
+   - Event Name: `form_submit_success` ou `generate_lead`
    - Parâmetros:
-     - `form_id`: `contact-form`
-     - `form_name`: `diagnostico-estrategico`
+     - `form_id`: `{{DLV - form_id}}` (variável Data Layer: form_id)
+     - `form_name`: `{{DLV - form_name}}`
+     - `form_status`: `{{DLV - form_status}}`
+
+3. **Variáveis no GTM**: Criar variáveis do tipo "Data Layer Variable" para `form_id`, `form_name`, `form_status` (escopo do evento).
 
 ---
 
 ## 📊 Métricas Recomendadas
 
-### Eventos Principais
+### Eventos Principais (disparados no dataLayer pelo site)
 - `page_view` (automático)
 - `cta_click` (todos os CTAs)
 - `whatsapp_click` (mobile + desktop)
-- `form_submit` (submissão)
-- `form_success` (sucesso)
-- `form_error` (erro)
-- `section_view` (scroll por seção)
+- `form_submit` (usuário clicou em Enviar)
+- `form_submit_success` (API retornou sucesso – **use para conversão**)
+- `form_submit_error` (API retornou erro)
+- `section_view` (scroll por seção, se configurado)
 
 ### Dimensões Customizadas
 - `element` (cta-hero, cta-intermediate, cta-form-submit, etc.)
@@ -306,8 +328,8 @@ CTAs
 ├── data-gtm-element="cta-hero"
 ├── data-gtm-element="cta-intermediate"
 └── data-gtm-element="cta-form-submit"
-    ├── data-gtm-action="click" ou "submit"
-    └── data-gtm-label="quero-estruturar-minhas-vendas"
+    ├── data-gtm-action="submit"
+    └── data-gtm-label="solicitar-diagnostico-gratuito"
 
 WhatsApp
 ├── data-gtm-element="whatsapp-mobile" ou "whatsapp-desktop"
@@ -321,8 +343,13 @@ Formulário
 ├── data-gtm-field="fullname"
 ├── data-gtm-field="email"
 ├── data-gtm-field="mobile-number"
-├── data-gtm-event="form-success" (quando sucesso)
-└── data-gtm-event="form-error" (quando erro)
+├── data-gtm-field="message"
+├── data-gtm-event="form-success" (div visível quando sucesso)
+├── data-gtm-event="form-error" (div visível quando erro)
+└── dataLayer (Custom Events):
+    ├── form_submit (ao clicar Enviar)
+    ├── form_submit_success (resposta OK da API – conversão)
+    └── form_submit_error (resposta erro da API)
 ```
 
 ---

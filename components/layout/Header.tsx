@@ -1,87 +1,206 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
+import gsap from "gsap"
+import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
+
+const SCROLL_THRESHOLD = 24
 
 export function Header() {
-  const [logoError, setLogoError] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const barRef = useRef<HTMLDivElement>(null)
+  const mobileNavRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const bar = barRef.current
+    if (!bar) return
+    const tl = gsap.timeline()
+    tl.fromTo(
+      bar,
+      { y: -20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
+    )
+    const links = bar.querySelectorAll<HTMLElement>("nav a")
+    tl.fromTo(
+      links,
+      { opacity: 0, y: -8 },
+      { opacity: 1, y: 0, duration: 0.35, stagger: 0.06, ease: "power2.out" },
+      "-=0.25"
+    )
+  }, [])
+
+  useEffect(() => {
+    if (!mobileOpen || !mobileNavRef.current) return
+    const links = mobileNavRef.current.querySelectorAll<HTMLElement>("a")
+    gsap.fromTo(
+      links,
+      { opacity: 0, x: -12 },
+      { opacity: 1, x: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" }
+    )
+  }, [mobileOpen])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (mobileOpen) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileOpen])
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
+    setMobileOpen(false)
     const element = document.getElementById(targetId)
     if (element) {
       const headerHeight = 80
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - headerHeight
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" })
     }
   }
 
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex h-20 items-center justify-between">
-          <Link 
-            href="/" 
-            className="flex items-center transition-opacity hover:opacity-90"
-            aria-label="Ir para o início"
-          >
-            {!logoError ? (
-              <div className="relative h-16 w-auto flex-shrink-0">
-                <Image
-                  src="/logo.png"
-                  alt="Dominus Estratégico"
-                  width={200}
-                  height={64}
-                  className="object-contain h-16 w-auto"
-                  priority
-                  sizes="(max-width: 768px) 150px, 200px"
-                  onError={() => setLogoError(true)}
-                />
-              </div>
-            ) : (
-              <div className="flex items-center space-x-3">
-                <div className="h-12 w-12 flex-shrink-0 flex items-center justify-center bg-primary rounded-md">
-                  <span className="font-serif text-xl font-bold text-white">D</span>
-                </div>
-                <div className="hidden sm:block">
-                  <span className="font-serif text-xl font-bold text-primary">
-                    Dominus Estratégico
-                  </span>
-                </div>
-              </div>
-            )}
-          </Link>
+  const navLinks = [
+    { href: "#problema", label: "O problema", id: "problema" },
+    { href: "#o-que-fazemos", label: "O que fazemos", id: "o-que-fazemos" },
+    { href: "#como-trabalhamos", label: "Como trabalhamos", id: "como-trabalhamos" },
+    { href: "#quem-ja-passou", label: "Depoimentos", id: "quem-ja-passou" },
+  ]
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <a
-              href="#problema"
-              onClick={(e) => handleScroll(e, "problema")}
-              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-            >
-              O Problema
-            </a>
-            <a
-              href="#metodo"
-              onClick={(e) => handleScroll(e, "metodo")}
-              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-            >
-              O Método
-            </a>
-            <a
-              href="#final-cta"
-              onClick={(e) => handleScroll(e, "final-cta")}
-              className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-            >
-              Contato
-            </a>
-          </nav>
+  return (
+    <header
+      className="fixed top-0 left-0 right-0 z-50 w-full px-4 pt-4 sm:px-6 md:pt-5 pointer-events-none"
+      data-gtm-section="header"
+      aria-label="Navegação principal"
+    >
+      <div className="flex w-full justify-center">
+        <div
+          ref={barRef}
+          className={`pointer-events-auto ml-0 mr-0 w-fit rounded-2xl transition-all duration-300 ease-out md:w-full md:max-w-7xl ${
+            scrolled ? "liquid-glass-strong" : "liquid-glass"
+          }`}
+        >
+          <div className="relative flex h-14 md:h-16 w-full items-center justify-between px-4 sm:px-6 lg:px-8">
+            {/* Logo à esquerda */}
+            <div className="flex items-center">
+              <Link
+                href="#hero"
+                onClick={(e) => handleScroll(e as unknown as React.MouseEvent<HTMLAnchorElement>, "hero")}
+                className="flex items-center"
+                aria-label="Voltar ao início"
+              >
+                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-border/70 bg-background/80 shadow-sm">
+                  <Image
+                    src="/logo.png"
+                    alt="Dominus Estratégico"
+                    fill
+                    className="object-contain"
+                    sizes="48px"
+                    priority
+                  />
+                </div>
+              </Link>
+            </div>
+
+            {/* Links centralizados */}
+            <nav className="hidden md:flex flex-1 items-center justify-center gap-5 lg:gap-8">
+              {navLinks.map(({ href, label, id }) => (
+                <a
+                  key={id}
+                  href={href}
+                  onClick={(e) => handleScroll(e, id)}
+                  className={`relative inline-block text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 after:pointer-events-none after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 ${
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "text-foreground/90 hover:text-foreground"
+                  }`}
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+
+            {/* CTA + menu mobile à direita */}
+            <div className="flex items-center justify-end gap-2">
+              <Button
+                asChild
+                size="sm"
+                className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-md transition-all duration-300 hover:scale-[1.04] hover:shadow-lg active:scale-[0.98]"
+                data-gtm-element="cta-header"
+                data-gtm-action="click"
+                data-gtm-label="conversa-estrategica"
+              >
+                <Link href="#final-cta">Conversa estratégica</Link>
+              </Button>
+
+              <button
+                type="button"
+                className="md:hidden p-2 rounded-lg text-foreground hover:bg-foreground/10 transition-colors"
+                onClick={() => setMobileOpen((o) => !o)}
+                aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+                aria-expanded={mobileOpen}
+              >
+                {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Menu mobile: overlay e popup com cantos arredondados */}
+      <div
+        className={`md:hidden fixed inset-0 top-[5.5rem] transition-opacity duration-300 ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        <div
+          className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
+        <nav
+          ref={mobileNavRef}
+          className={`relative mt-3 mx-4 rounded-2xl liquid-glass-strong py-4 transition-all duration-300 ${
+            mobileOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-90"
+          }`}
+        >
+          <div className="flex flex-col">
+            {navLinks.map(({ href, label, id }) => (
+              <a
+                key={id}
+                href={href}
+                onClick={(e) => handleScroll(e, id)}
+                className="px-4 py-3 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors duration-200 active:bg-muted/70"
+              >
+                {label}
+              </a>
+            ))}
+            <div className="px-4 pt-3 mt-2 border-t border-border">
+              <Button
+                asChild
+                size="sm"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-md"
+                data-gtm-element="cta-header-mobile"
+                data-gtm-action="click"
+                data-gtm-label="conversa-estrategica"
+              >
+                <Link href="#final-cta" onClick={() => setMobileOpen(false)}>
+                  Conversa estratégica
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </nav>
       </div>
     </header>
   )

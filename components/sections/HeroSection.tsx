@@ -1,105 +1,116 @@
 "use client"
 
+import Link from "next/link"
+import { useState, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { Check, ArrowRight } from "lucide-react"
-import Image from "next/image"
+import { FadeContent } from "@/components/animations/FadeContent"
 
 export function HeroSection() {
-  const scrollToForm = () => {
-    const formSection = document.getElementById("final-cta")
-    formSection?.scrollIntoView({ behavior: "smooth" })
-  }
+  const sectionRef = useRef<HTMLElement>(null)
+  const [mouse, setMouse] = useState({ x: 50, y: 50 })
 
-  const benefits = [
-    "Análise profunda do seu posicionamento atual",
-    "Landing Page estruturada para conversão real",
-    "Comunicação alinhada com seu público-alvo",
-  ]
-
-  // URL otimizada para melhor performance (LCP)
-  const heroImageUrl = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=70&w=1920&h=1080&auto=format&fit=crop"
+  const onMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 100
+      const y = ((e.clientY - rect.top) / rect.height) * 100
+      setMouse({ x, y })
+    },
+    []
+  )
 
   return (
-    <section id="hero" className="relative min-h-[95vh] flex items-center" itemScope itemType="https://schema.org/WebPage" data-gtm-section="hero">
-      {/* Imagem de Fundo - Otimizada para LCP com Next.js Image */}
-      <div className="absolute inset-0">
-        <Image
-          src={heroImageUrl}
-          alt="Estrutura arquitetônica moderna representando organização e método estratégico para criação de Landing Pages que convertem"
-          fill
-          priority
-          quality={75}
-          className="object-cover"
-          sizes="100vw"
-          fetchPriority="high"
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative pt-24 pb-14 md:pt-[10rem] md:pb-[6rem] lg:pt-[12rem] lg:pb-32 bg-background overflow-hidden"
+      data-gtm-section="hero"
+      onMouseMove={onMouseMove}
+    >
+      {/* Fundo interativo: orbs em gradiente que reagem ao mouse */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        aria-hidden
+      >
+        <div
+          className="absolute h-[80vmax] w-[80vmax] rounded-full opacity-[0.15] blur-3xl transition-transform duration-700 ease-out"
           style={{
-            objectPosition: "center right",
+            left: "10%",
+            top: "20%",
+            background: "radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)",
+            transform: `translate(${(mouse.x - 50) * 0.3}%, ${(mouse.y - 50) * 0.3}%)`,
           }}
         />
-        {/* Overlay com gradiente otimizado para melhor contraste */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/50" aria-hidden="true"></div>
+        <div
+          className="absolute h-[60vmax] w-[60vmax] rounded-full opacity-[0.12] blur-3xl transition-transform duration-700 ease-out"
+          style={{
+            right: "5%",
+            bottom: "10%",
+            background: "radial-gradient(circle, hsl(var(--secondary)) 0%, transparent 70%)",
+            transform: `translate(${(50 - mouse.x) * 0.2}%, ${(50 - mouse.y) * 0.2}%)`,
+          }}
+        />
+        <div
+          className="absolute h-[50vmax] w-[50vmax] rounded-full opacity-[0.08] blur-3xl transition-transform duration-500 ease-out"
+          style={{
+            left: "50%",
+            top: "50%",
+            background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 65%)",
+            transform: `translate(calc(-50% + ${(mouse.x - 50) * 0.15}%), calc(-50% + ${(mouse.y - 50) * 0.15}%))`,
+          }}
+        />
+        {/* Gradiente estático suave para profundidade */}
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            background: "radial-gradient(ellipse 80% 50% at 50% 0%, hsl(var(--primary) / 0.08) 0%, transparent 50%)",
+          }}
+        />
       </div>
 
-      {/* Conteúdo sobreposto */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 w-full">
-        <div className="max-w-3xl space-y-10 py-16 md:py-24">
-          {/* H1 Otimizado - Quebrado estrategicamente */}
-          <div className="space-y-4">
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-primary text-left">
-              <span className="block">Criação de Landing Pages</span>
-              <span className="block text-primary">que Convertem</span>
-            </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-primary/90 leading-tight">
-              Transforme Visitantes em Clientes
-            </p>
-          </div>
-          
-          {/* Subheadline Otimizada - Mais curta e direta */}
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-left max-w-2xl font-medium">
-            Você investe em tráfego, mas as vendas não aparecem? 
-            <span className="font-semibold text-primary"> Especializamos na criação de Landing Pages estratégicas</span> que convertem visitantes em clientes de forma previsível.
-          </p>
-
-          {/* CTA Super Destacado */}
-          <div className="pt-2 space-y-3">
-            <Button
-              onClick={scrollToForm}
-              size="lg"
-              className="group bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base md:text-lg px-10 md:px-14 py-7 md:py-8 h-auto font-bold w-full sm:w-auto shadow-2xl hover:shadow-secondary/50 transition-all duration-300 transform hover:scale-105 rounded-lg"
-              data-gtm-element="cta-hero"
-              data-gtm-action="click"
-              data-gtm-label="solicitar-diagnostico-gratuito"
-            >
-              <span className="flex items-center gap-2">
-                Solicitar Diagnóstico Gratuito
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
-              </span>
-            </Button>
-            
-            {/* Microcopy abaixo do CTA */}
-            <p className="text-sm md:text-base text-gray-600 font-medium flex items-center gap-2 justify-center sm:justify-start">
-              <Check className="h-4 w-4 text-secondary flex-shrink-0" strokeWidth={3} />
-              <span>Resposta em até 24h • Análise personalizada • Sem compromisso</span>
-            </p>
-          </div>
-
-          {/* Benefícios com Cards Sutis */}
-          <div className="pt-6 space-y-3">
-            {benefits.map((benefit, index) => (
-              <div 
-                key={index} 
-                className="flex items-start gap-4 bg-white/60 backdrop-blur-sm rounded-lg p-4 md:p-5 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-200"
-              >
-                <div className="flex-shrink-0 mt-0.5">
-                  <div className="p-2 bg-secondary/10 rounded-lg">
-                    <Check className="h-5 w-5 md:h-6 md:w-6 text-secondary" strokeWidth={3} />
-                  </div>
-                </div>
-                <p className="text-gray-800 text-base md:text-lg font-semibold leading-relaxed pt-0.5">
-                  {benefit}
-                </p>
+      <div className="container relative z-10 mx-auto px-5 sm:px-6 lg:px-12">
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="flex max-w-3xl flex-col items-center lg:max-w-4xl">
+            <FadeContent animateOnMount delay={0.08} duration={0.9} y={28} className="w-full">
+              <h1 className="mx-auto max-w-3xl font-serif text-4xl sm:text-5xl md:text-6xl lg:max-w-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-foreground leading-[1.35] tracking-tight">
+                Aumente{" "}
+                <span className="text-primary">conversões</span>
+                {" "}e impulsione seu{" "}
+                <span className="text-primary">negócio</span>
+              </h1>
+            </FadeContent>
+            <FadeContent animateOnMount delay={0.15} duration={0.8} y={24} className="w-full">
+              <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed md:mt-8 md:text-xl">
+                Tráfego pago que converte, sites e aplicações web que vendem e landing pages que fecham. Pensado para
+                empresas e profissionais autônomos que querem transformar visitas em leads qualificados todos os dias.
+              </p>
+            </FadeContent>
+            <FadeContent animateOnMount delay={0.3} duration={0.8} y={24} className="w-full">
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row md:mt-12">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full sm:w-auto h-14 px-8 text-center text-base md:text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 rounded-md"
+                  data-gtm-element="cta-hero"
+                  data-gtm-action="click"
+                  data-gtm-label="conversa-estrategica"
+                >
+                  <Link href="#final-cta">Impulsionar meu negócio agora</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto h-14 px-8 text-center text-base font-medium rounded-md border-2 border-primary text-primary hover:bg-primary/10"
+                  data-gtm-element="cta-hero-secondary"
+                  data-gtm-action="click"
+                  data-gtm-label="ver-processo"
+                >
+                  <Link href="#como-trabalhamos">Ver como geramos resultados</Link>
+                </Button>
               </div>
-            ))}
+            </FadeContent>
           </div>
         </div>
       </div>
