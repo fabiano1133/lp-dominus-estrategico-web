@@ -1,16 +1,43 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { IntroSection } from "@/components/sections/IntroSection"
-import { ProcessSection } from "@/components/sections/ProcessSection"
-import { StatsSection } from "@/components/sections/StatsSection"
-import { TestimonialSection } from "@/components/sections/TestimonialSection"
-import { CaseSection } from "@/components/sections/CaseSection"
 import { ProblemSection } from "@/components/sections/ProblemSection"
-import { ApproachSection } from "@/components/sections/ApproachSection"
-import { ProofSection } from "@/components/sections/ProofSection"
-import { FinalCTASection } from "@/components/sections/FinalCTASection"
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton"
+
+/* Seções abaixo da dobra: carregamento dinâmico para melhorar Speed Index / FCP */
+const ProcessSection = dynamic(
+  () => import("@/components/sections/ProcessSection").then((m) => ({ default: m.ProcessSection })),
+  { ssr: true }
+)
+const StatsSection = dynamic(
+  () => import("@/components/sections/StatsSection").then((m) => ({ default: m.StatsSection })),
+  { ssr: true }
+)
+const TestimonialSection = dynamic(
+  () => import("@/components/sections/TestimonialSection").then((m) => ({ default: m.TestimonialSection })),
+  { ssr: true }
+)
+const CaseSection = dynamic(
+  () => import("@/components/sections/CaseSection").then((m) => ({ default: m.CaseSection })),
+  { ssr: true }
+)
+const ApproachSection = dynamic(
+  () => import("@/components/sections/ApproachSection").then((m) => ({ default: m.ApproachSection })),
+  { ssr: true }
+)
+const ProofSection = dynamic(
+  () => import("@/components/sections/ProofSection").then((m) => ({ default: m.ProofSection })),
+  { ssr: true }
+)
+const FinalCTASection = dynamic(
+  () => import("@/components/sections/FinalCTASection").then((m) => ({ default: m.FinalCTASection })),
+  { ssr: true }
+)
+const WhatsAppButton = dynamic(
+  () => import("@/components/ui/WhatsAppButton").then((m) => ({ default: m.WhatsAppButton })),
+  { ssr: false }
+)
 
 export default function Home() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "92984600010"

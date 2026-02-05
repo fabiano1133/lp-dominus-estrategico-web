@@ -15,22 +15,19 @@ export function Header() {
   const barRef = useRef<HTMLDivElement>(null)
   const mobileNavRef = useRef<HTMLElement>(null)
 
+  /* Barra e links visíveis desde o 1º quadro (melhora Speed Index); animação só sutil */
   useEffect(() => {
     const bar = barRef.current
     if (!bar) return
     const run = () => {
       const tl = gsap.timeline()
-      tl.fromTo(
-        bar,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
-      )
+      tl.fromTo(bar, { y: -8 }, { y: 0, duration: 0.4, ease: "power2.out" })
       const links = bar.querySelectorAll<HTMLElement>("nav a")
       tl.fromTo(
         links,
-        { opacity: 0, y: -8 },
-        { opacity: 1, y: 0, duration: 0.35, stagger: 0.06, ease: "power2.out" },
-        "-=0.25"
+        { y: -4 },
+        { y: 0, duration: 0.25, stagger: 0.04, ease: "power2.out" },
+        "-=0.2"
       )
     }
     if (typeof requestIdleCallback !== "undefined") {

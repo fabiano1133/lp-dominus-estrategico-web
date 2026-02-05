@@ -89,6 +89,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="icon" type="image/png" href="/logo.png" />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || "https://dominusestrategico.com.br"} />
